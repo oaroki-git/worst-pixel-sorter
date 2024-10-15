@@ -1,6 +1,6 @@
 [image]
-original_path = "~/Documents/wallpapers/girl.jpg"
-save_path = "~/Documents/wallpapers/sorts/girl sorted.jpg"
+original_path = "path/to/image"
+save_path = "path/to/saved/image"
 
 [processing]
 white_threshold = 195
