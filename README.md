@@ -19,3 +19,8 @@ on the off chance that it actually looks good, this is what it can look like:
 
 # usage
 call the `UIwrapper` function for manual input of parameters, or the `readConfig` function to read a toml file at `~/.config/pixelsort.toml`
+
+# configuration
+this pixel sorter follows after [@Acerola_t's pixel sorting video](https://youtu.be/HMmmBDRy-jE?si=xwhLxhm4TeBg9YvG) which uses a contrast map to figure out what to sort.
+
+pixels with a grayscale value in the range (black threshold, white threshold) will be sorted.
