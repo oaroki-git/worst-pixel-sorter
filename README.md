@@ -1,2 +1,4 @@
-# worst-pixel-sorter
-but hey, it works!
+# requirements
+numpy
+tqdm
+PIL (pillow)
