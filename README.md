@@ -24,3 +24,5 @@ call the `UIwrapper` function for manual input of parameters, or the `readConfig
 this pixel sorter follows after [@Acerola_t's pixel sorting video](https://youtu.be/HMmmBDRy-jE?si=xwhLxhm4TeBg9YvG) which uses a contrast map to figure out what to sort.
 
 pixels with a grayscale value in the range (black threshold, white threshold) will be sorted.
+
+see [the example toml](https://github.com/oaroki-git/worst-pixel-sorter/blob/main/pixelsort.toml) for a reference
