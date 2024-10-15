@@ -1,0 +1,7 @@
+[image]
+original_path = "~/Documents/wallpapers/girl.jpg"
+save_path = "~/Documents/wallpapers/sorts/girl sorted.jpg"
+
+[processing]
+white_threshold = 195
+black_threshold = 20
