@@ -7,7 +7,7 @@ i only did horizontal sorting because idk
  - PIL (pillow)
 
 # showcase
-works the best with PNG files. 
+works the best with PNG files; lossy compressed image artifacts make it look less appealing 
 
 on the off chance that it actually looks good, this is what it can look like:
 
