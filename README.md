@@ -20,9 +20,12 @@ on the off chance that it actually looks good, this is what it can look like:
 # usage
 call the `UIwrapper` function for manual input of parameters, or the `readConfig` function to read a toml file at `~/.config/pixelsort.toml`
 
-# configuration
+# how it works
 this pixel sorter follows after [@Acerola_t's pixel sorting video](https://youtu.be/HMmmBDRy-jE?si=xwhLxhm4TeBg9YvG) which uses a contrast map to figure out what to sort.
 
-pixels with a grayscale value in the range (black threshold, white threshold) will be sorted.
+it's practically a band pass filter where pixels with a grayscale value in the range of (black threshold, white threshold) are candidates to be sorted.
 
+the sorter then sorts each sequence of consecutive sortable pixels in each row horizonally from lowest to highest luminance
+
+# configuration
 see [the example toml](https://github.com/oaroki-git/worst-pixel-sorter/blob/main/pixelsort.toml) for a reference
