@@ -1,6 +1,9 @@
 # probably the most unoptimized pixel sorter you will ever see
 i only did horizontal sorting because idk
 
+## Goals
+multiprocessing to hopefully make it faster
+
 # requirements
  - numpy
  - tqdm
