@@ -13,7 +13,7 @@ def getContrastMap(array, whiteVal, blackVal):
 
 def getSortMap(cmap):
     global pixels
-    smap = numpy.empty(cmap.shape)
+    smap = []
     for row in range(cmap.shape[0]):
         col = 0
         index = -1
@@ -21,32 +21,31 @@ def getSortMap(cmap):
             if not cmap[row][col]:
                 col += 1
                 continue
-            index = col
+            colPeg = col
             length = 0
             while col < cmap.shape[1] and cmap[row][col]:
                 col += 1
                 length += 1
-            #if length > cmap.shape[1]:
-            smap[row][index] = length
+            smap.append([row, colPeg, length])
             pixels += length
     print("sort map done!")
-    return smap
+    return numpy.array(smap)
 
-def sortBuffer(pixArr, grsclArr, smap, row, col, progress):
-    length = int(smap[row][col])
-    if length == 0:
-        return pixArr
-    buffer = zip(grsclArr[row][col:col+length:], pixArr[row][col:col+length:])
-    buffer = list(list(zip(*sorted(buffer, key=lambda x: x[0])))[1])
-    pixArr[row][col:col+length:] = buffer
-    progress.update(length)
+def sortBuffer(pixArr, grsclArr, buffer, progress):
+    row = buffer[0]
+    col = buffer[1]
+    length = buffer[2]
+    zipBuffer = zip(grsclArr[row][col:col+length:], pixArr[row][col:col+length:])
+    sortedBuffer = list(list(zip(*sorted(zipBuffer, key=lambda x: x[0])))[1])
+    return (row, col, sortedBuffer)
     #print(f"sorted {length} pixels starting from {row}, {col}")
-    return pixArr
+    #return pixArr
 
 def mainsort(pixArr, grsclArr, smap, progress):
-    for row in range(pixArr.shape[0]):
-        for col in range(pixArr.shape[1]):
-            pixArr = sortBuffer(pixArr, grsclArr, smap, row, col, progress)
+    for buffer in smap:
+        row, col, sortedBuffer = sortBuffer(pixArr, grsclArr, buffer, progress)
+        pixArr[row][col:col+len(sortedBuffer):] = sortedBuffer
+        progress.update(len(sortedBuffer))
     return pixArr
 
 def sortImage(path, whiteVal, blackVal, savePath = ""):
