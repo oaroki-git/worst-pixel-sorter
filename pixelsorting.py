@@ -3,6 +3,7 @@ import numpy
 import tqdm
 import tomllib
 import os
+from multiprocessing import Pool
 
 def getContrastMap(array, whiteVal, blackVal):
     cmap = numpy.empty(array.shape)
@@ -12,7 +13,7 @@ def getContrastMap(array, whiteVal, blackVal):
     return cmap
 
 def getSortMap(cmap):
-    global pixels
+    pixels = 0
     smap = []
     for row in range(cmap.shape[0]):
         col = 0
@@ -26,41 +27,54 @@ def getSortMap(cmap):
             while col < cmap.shape[1] and cmap[row][col]:
                 col += 1
                 length += 1
-            smap.append([row, colPeg, length])
+            smap.append((row, colPeg, length,))
             pixels += length
     print("sort map done!")
-    return numpy.array(smap)
+    return (numpy.array(smap), pixels)
 
-def sortBuffer(pixArr, grsclArr, buffer, progress):
-    row = buffer[0]
-    col = buffer[1]
-    length = buffer[2]
+def sortBuffer(pixArr, grsclArr, bufferInfo):
+    row = bufferInfo[0]
+    col = bufferInfo[1]
+    length = bufferInfo[2]
     zipBuffer = zip(grsclArr[row][col:col+length:], pixArr[row][col:col+length:])
     sortedBuffer = list(list(zip(*sorted(zipBuffer, key=lambda x: x[0])))[1])
     return (row, col, sortedBuffer)
     #print(f"sorted {length} pixels starting from {row}, {col}")
     #return pixArr
 
-def mainsort(pixArr, grsclArr, smap, progress):
+
+
+def getWrapper(pixArr, grsclArr):
+    """ legacy code
     for buffer in smap:
         row, col, sortedBuffer = sortBuffer(pixArr, grsclArr, buffer, progress)
         pixArr[row][col:col+len(sortedBuffer):] = sortedBuffer
         progress.update(len(sortedBuffer))
-    return pixArr
+    """
+    global wrapper
+    def wrapper(bufferInfo):
+        return sortBuffer(pixArr, grsclArr, bufferInfo)
 
 def sortImage(path, whiteVal, blackVal, savePath = ""):
-    global pixels
     image = Image.open(os.path.expanduser(path))
     pixArr = numpy.array(image)
     grsclArr = numpy.array(image.convert("L"))
 
     cmap = getContrastMap(grsclArr, whiteVal, blackVal)
-    smap = getSortMap(cmap)
-    print(f"sorting {pixels} pixels..")
+    smap, pixels = getSortMap(cmap)
     progress = tqdm.tqdm(total=pixels)
-    output = mainsort(pixArr, grsclArr, smap, progress)
 
-    newImage = Image.fromarray(output)
+    print(f"sorting {pixels} pixels..")
+    getWrapper(pixArrm grsclArr)
+    with Pool() as pool:
+        global wrapper
+        results = [pool.map(wrapper, smap)]
+    
+    for buffer in results:
+        pixArr[row][col:col+len(sortedBuffer):] = sortedBuffer
+        progress.update(len(sortedBuffer))
+
+    newImage = Image.fromarray(pixArr)
 
     if savePath == "":
         newImage.show()
@@ -86,5 +100,5 @@ def readConfig():
 
     sortImage(path, white, black, save)
 
-pixels = 0
-readConfig()
+if __name__ == "__main__":
+    readConfig()
