@@ -2,6 +2,8 @@
 i only did horizontal sorting because idk
 
 ## Needs Fixing
+> [!IMPORTANT]
+> the sorting since multiprocessing is different now so it might look different and blocky, i'll have to figure that out
 1. make multiprocessing faster
 2. fix multiprocessing weirdness
 4. better ways to choose bandpass values and not relying on trial and error
