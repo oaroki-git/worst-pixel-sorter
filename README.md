@@ -1,12 +1,15 @@
 # probably the most unoptimized pixel sorter you will ever see
 i only did horizontal sorting because idk
 
-## Goals
+## Needs Fixing
 1. make multiprocessing faster
 2. fix multiprocessing weirdness
-3. better ways to choose bandpass values and not relying on trial and error
-4. optional contrast map visualizer (?)
-5. GUI (??)
+4. better ways to choose bandpass values and not relying on trial and error
+
+## Ideas
+1. optional contrast map visualizer (?)
+2. GUI (??)
+3. different ways of sorting
 
 # requirements
  - numpy
