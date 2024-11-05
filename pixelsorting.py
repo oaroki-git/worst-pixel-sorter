@@ -62,17 +62,19 @@ def sortImage(path, whiteVal, blackVal, savePath = ""):
 
     cmap = getContrastMap(grsclArr, whiteVal, blackVal)
     smap, pixels = getSortMap(cmap)
-    progress = tqdm.tqdm(total=pixels)
 
     print(f"sorting {pixels} pixels..")
-    getWrapper(pixArrm grsclArr)
+    getWrapper(pixArr, grsclArr)
     with Pool() as pool:
         global wrapper
         results = [pool.map(wrapper, smap)]
-    
-    for buffer in results:
-        pixArr[row][col:col+len(sortedBuffer):] = sortedBuffer
-        progress.update(len(sortedBuffer))
+
+    print("writing pixels..")
+    progress = tqdm.tqdm(total=pixels)
+    for bufferInfo in results[0]:
+        row, col, buffer = bufferInfo
+        pixArr[row][col:col+len(buffer):] = buffer
+        progress.update(len(buffer))
 
     newImage = Image.fromarray(pixArr)
 
