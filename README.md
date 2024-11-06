@@ -1,5 +1,5 @@
 > [!WARNING]
-> the examples no longer match what the program does because the original program did something weird and caused artifacts that the new one didn't but then the artifacts actually looked good so i'm trying to reintroduce them in lol but right now the sorter looks ass, if anyone wants the original go rewind pixelsorting.py
+> the examples no longer match what the program does because the original program did something weird and caused artifacts that the new one didn't but then the artifacts actually looked good so i'm trying to reintroduce them in lol but right now the sorter looks ass, if anyone wants the good one use pixelsorting-legacy.py
 
 # probably the most unoptimized (and wrong) pixel sorter you will ever see
 i only did horizontal sorting because idk
